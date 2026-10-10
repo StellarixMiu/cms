@@ -1,15 +1,41 @@
 {
-  "name": "cms",
-  "version": "1.0.50",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
-  },
-  "dependencies": {
-    "elysia": "latest"
-  },
-  "devDependencies": {
-    "bun-types": "latest"
-  },
-  "module": "src/index.js"
+	"name": "cms",
+	"type": "module",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"scalar": "bun scripts/copy-scalar.ts",
+		"prestart:dev": "bun scalar",
+		"prestart:app": "bun scalar",
+		"prestart:build": "bun scalar",
+		"start:dev": "bun --watch src/index.ts",
+		"start:app": "bun src/index.ts --cluster",
+		"db:generate": "bun scripts/db-kit.ts generate",
+		"db:migrate": "bun scripts/db-kit.ts migrate",
+		"db:push": "bun scripts/db-kit.ts push",
+		"db:seed": "bun scripts/db-seed.ts",
+		"db:seed:function": "bun scripts/db-seed.ts --function",
+		"key:generate": "bun scripts/generate-key.ts",
+		"lint": "bunx biome check",
+		"lint:fix": "bunx biome check --write"
+	},
+	"dependencies": {
+		"@bogeychan/elysia-logger": "^0.1.10",
+		"@elysia/openapi": "^1.4.16",
+		"@elysia/opentelemetry": "^1.4.12",
+		"@elysia/server-timing": "^1.4.1",
+		"@elysia/static": "^1.4.11",
+		"@scalar/api-reference": "^1.73.1",
+		"drizzle-orm": "^1.0.0-rc.4",
+		"elysia": "latest",
+		"pino": "^10.4.0",
+		"pino-pretty": "^13.2.0",
+		"pino-roll": "^4.0.0",
+		"zod": "^4.6.5"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.15",
+		"bun-types": "latest",
+		"drizzle-kit": "^1.0.0-rc.4"
+	}
 }
